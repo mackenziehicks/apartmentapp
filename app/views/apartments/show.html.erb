@@ -30,5 +30,36 @@
   <%= @apartment.country %>
 </p>
 
+<p>
+  <strong>Lattitude:</strong>
+  <%= @apartment.latitude%>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @apartment.longitude%>
+</p>
+
+<p>
+  <strong>Owner:</strong>
+<a href="/owners/ <%=@apartment.owner.id%>"> <%= @apartment.owner.name%></a>
+</p>
+<hr>
+<div id="map">Google map will appear here...</div>
+<script type="text/javascript">
+handler = Gmaps.build('Google');
+handler.buildMap({
+    provider: {},
+    internal: {id: 'map'}
+  },
+  function() {
+    markers = handler.addMarkers(<%=raw @pindrop.to_json %>);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    handler.getMap().setZoom(12);
+  }
+);
+</script>
+<br>
 <%= link_to 'Edit', edit_apartment_path(@apartment) %> |
 <%= link_to 'Back', apartments_path %>
