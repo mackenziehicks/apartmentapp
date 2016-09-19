@@ -21,6 +21,19 @@ RSpec.feature "LandingPages", type: :feature do
       Then 'I can see the Apartments Listing Page' do
         expect(page).to have_content("Listing Apartments")
       end #end of THEN
+      Then 'I can create an owner' do
+        click_link('New Owner')
+        fill_in('Name', :with => 'John Smith')
+        fill_in('Time', :with => '8am-7pm')
+        fill_in('Phone', :with => '1234567789')
+        click_button('Create Owner')
+      end
+      And "I'm taken to a new page with the owner info" do
+        expect(page).to have_content('John Smith')
+        expect(page).to have_content('8am-7pm')
+        expect(page).to have_content('1234567789')
+        click_link('Home')
+      end
       And 'I can click on "New Apartment"' do
        click_link('New Apartment')
      end #end of AND
@@ -31,6 +44,7 @@ RSpec.feature "LandingPages", type: :feature do
       fill_in('Postal code', :with => '92104')
       fill_in('State', :with => 'CA')
       fill_in('Country', :with => 'USA')
+      select('John Smith', :from => 'Owner')
       click_button('Create Apartment')
     end #end of And
     Then "I'm taken to a page that has all the info and tells us the apartment was created" do
