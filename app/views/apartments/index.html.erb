@@ -26,6 +26,7 @@
         <td><%= apartment.postal_code %></td>
         <td><%= apartment.country %></td>
         <td><a href="/owners/ <%=apartment.owner.id%>"> <%= apartment.owner.name%></a></td>
+        <td><%= image_tag apartment.image.url(:small)%></td>
         <td><%= link_to 'Show', apartment %></td>
         <td><%= link_to 'Edit', edit_apartment_path(apartment) %></td>
         <td><%= link_to 'Destroy', apartment, method: :delete, data: { confirm: 'Are you sure?' } %></td>

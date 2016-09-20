@@ -6,7 +6,6 @@
 function showLocations(data) {
   if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
-      alert("alert");
       data[data.length] = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
@@ -41,7 +40,6 @@ function loadAndCreateGmap() {
   if ($('#map').length > 0) {
     // Access the data-apartment-id attribute on the map element
     var apartmentId = $('#map').attr('data-apartment-id');
-    alert(apartmentId);
     $.ajax({
     dataType: 'json',
     url: '/apartments/' + apartmentId + '/map_location',
