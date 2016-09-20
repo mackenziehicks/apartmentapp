@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+ <%= link_to image_tag(@apartment.image.url(:large)), @apartment.image.url %>
+
 <p>
   <strong>Address 1:</strong>
   <%= @apartment.address_1 %>
@@ -44,6 +46,7 @@
   <strong>Owner:</strong>
 <a href="/owners/ <%=@apartment.owner.id%>"> <%= @apartment.owner.name%></a>
 </p>
+
 <hr>
 <div id="map">Google map will appear here...</div>
 <script type="text/javascript">

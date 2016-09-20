@@ -5,12 +5,14 @@ class ApartmentsController < ApplicationController
   # GET /apartments.json
   def index
     @apartments = Apartment.all
+
   end
 
   # GET /apartments/1
   # GET /apartments/1.json
   def show
     @apartments = Apartment.find(params[:id]) #@apartments may also be found using the set_apartment method provided by scaffolding
+
    @pindrop = Gmaps4rails.build_markers(@apartments) do |apartment, marker|
      marker.lat apartment.latitude
      marker.lng apartment.longitude
@@ -29,12 +31,19 @@ class ApartmentsController < ApplicationController
 
   # GET /apartments/1/edit
   def edit
+    @owners_for_select = Owner.all.map do |owner|
+      [owner.name, owner.id]
+    end
   end
 
   # POST /apartments
   # POST /apartments.json
   def create
     @apartment = Apartment.new(apartment_params)
+
+    @owners_for_select = Owner.all.map do |owner|
+      [owner.name, owner.id]
+    end
 
     respond_to do |format|
       if @apartment.save
@@ -50,6 +59,9 @@ class ApartmentsController < ApplicationController
   # PATCH/PUT /apartments/1
   # PATCH/PUT /apartments/1.json
   def update
+    @owners_for_select = Owner.all.map do |owner|
+      [owner.name, owner.id]
+    end
     respond_to do |format|
       if @apartment.update(apartment_params)
         format.html { redirect_to @apartment, notice: 'Apartment was successfully updated.' }
@@ -79,6 +91,6 @@ class ApartmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def apartment_params
-      params.require(:apartment).permit(:address_1, :address_2, :city, :postal_code, :state, :country, :owner_id, :lattitude, :longitude)
+      params.require(:apartment).permit(:address_1, :address_2, :city, :postal_code, :state, :country, :owner_id, :lattitude, :longitude, :image)
     end
 end
