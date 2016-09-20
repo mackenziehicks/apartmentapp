@@ -57,3 +57,4 @@ gem 'bootstrap-generators'
 gem 'geocoder'
 gem 'gmaps4rails'
 gem "paperclip", "~> 5.0.0"
+gem 'textacular', '~> 3.0'

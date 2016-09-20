@@ -44,6 +44,7 @@ RSpec.feature "LandingPages", type: :feature do
       fill_in('Postal code', :with => '92104')
       fill_in('State', :with => 'CA')
       fill_in('Country', :with => 'USA')
+      
       select('John Smith', :from => 'Owner')
       click_button('Create Apartment')
     end #end of And

@@ -5,6 +5,5 @@ RSpec.describe Apartment, type: :model do
     expect{Apartment.new}.to_not raise_error
   end
 
-  it "Can "
 
 end

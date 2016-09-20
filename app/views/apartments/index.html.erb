@@ -35,6 +35,25 @@
 </table>
 
 <br>
-
-<%= link_to 'New Owner', new_owner_path %> | 
+<%= link_to 'New Owner', new_owner_path %> |
 <%= link_to 'New Apartment', new_apartment_path %>
+<br>
+<hr>
+
+<div id="index_map">Google map will appear here...</div>
+<script type="text/javascript">
+handler = Gmaps.build('Google');
+handler.buildMap({
+    provider: {},
+    internal: {id: 'index_map'}
+  },
+  function() {
+    markers = handler.addMarkers(<%=raw @pindrop.to_json %>);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    handler.getMap().setZoom(10);
+  }
+);
+</script>
+
+<br>

@@ -6,6 +6,12 @@ class ApartmentsController < ApplicationController
   def index
     @apartments = Apartment.all
 
+    @pindrop = Gmaps4rails.build_markers(@apartments) do |apartment, marker|
+      marker.lat apartment.latitude
+      marker.lng apartment.longitude
+      marker.infowindow apartment.full_address
+    end
+
   end
 
   # GET /apartments/1
@@ -18,6 +24,7 @@ class ApartmentsController < ApplicationController
      marker.lng apartment.longitude
      marker.infowindow apartment.full_address
    end
+
   end
 
   # GET /apartments/new
@@ -81,6 +88,17 @@ class ApartmentsController < ApplicationController
       format.html { redirect_to apartments_url, notice: 'Apartment was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  # add in the map location method to call on it in the js file : render the json object
+  def map_location
+    @apartments = Apartment.find(params[:apartment_id])
+    @hash = Gmaps4rails.build_markers(@apartments) do |apartment, marker|
+      marker.lat apartment.latitude
+      marker.lng apartment.longitude
+      marker.infowindow apartment.full_address
+    end
+    render json: @hash.to_json
   end
 
   private
