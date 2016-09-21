@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth)
      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
        user.email = auth.uid + "@twitter.com"
-       user.password = Devise.friendly_token[0,20]
+      #  user.password = Devise.friendly_token[0,20]
      end
    end
 
@@ -24,4 +24,15 @@ class User < ActiveRecord::Base
      end
    end
 
+   def password_required?
+     super && provider.blank?
+   end
+
+   def update_with_password(params, *options)
+     if encrypted_password.blank?
+       update_attributes(params, *options)
+     else
+      super
+      end
+    end
 end
