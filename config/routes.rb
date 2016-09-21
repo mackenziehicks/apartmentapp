@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :owners
   resources :apartments do
    # GET /apartmetns/:id/map_locations

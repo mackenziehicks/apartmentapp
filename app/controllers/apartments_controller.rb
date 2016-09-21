@@ -29,7 +29,7 @@ class ApartmentsController < ApplicationController
 
   # GET /apartments/new
   def new
-    @apartment = Apartment.new
+    @apartment = current_user.apartments.build
 
     @owners_for_select = Owner.all.map do |owner|
       [owner.name, owner.id]
@@ -38,15 +38,19 @@ class ApartmentsController < ApplicationController
 
   # GET /apartments/1/edit
   def edit
-    @owners_for_select = Owner.all.map do |owner|
+    if @apartment.user == current_user
+      @owners_for_select = Owner.all.map do |owner|
       [owner.name, owner.id]
+      end
+    else
+      redirect_to '/'
     end
   end
 
   # POST /apartments
   # POST /apartments.json
   def create
-    @apartment = Apartment.new(apartment_params)
+    @apartment = current_user.apartments.build(apartment_params)
 
     @owners_for_select = Owner.all.map do |owner|
       [owner.name, owner.id]
@@ -83,10 +87,14 @@ class ApartmentsController < ApplicationController
   # DELETE /apartments/1
   # DELETE /apartments/1.json
   def destroy
-    @apartment.destroy
-    respond_to do |format|
-      format.html { redirect_to apartments_url, notice: 'Apartment was successfully destroyed.' }
-      format.json { head :no_content }
+    if @apartment.user == current_user
+      @apartment.destroy
+      respond_to do |format|
+        format.html { redirect_to apartments_url, notice: 'Apartment was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to '/'      
     end
   end
 
