@@ -20,11 +20,17 @@
           <input type="submit" value="Make Admin"></input>
         <%end%>
       </td>
-      <!-- <td>
-        <%= form_tag('/admin/remove_admin/' + user.id.to_s, method: :put) do %>
-          <input type="submit" value="Remove Admin"></input>
+      <td>
+        <% if user == current_user %>
+          <%= form_tag('/admin/remove_admin/' + user.id.to_s, method: :put, data: { confirm: 'Are you sure?? this is your own Admin Rights!!! '}) do %>
+            <input type="submit" value="Remove Admin"></input>
+          <%end%>
+        <%else%>
+          <%= form_tag('/admin/remove_admin/' + user.id.to_s, method: :put) do %>
+            <input type="submit" value="Remove Admin"></input>
+          <%end%>
         <%end%>
-      </td> -->
+      </td>
     </tr>
     <%end%>
   </tbody>

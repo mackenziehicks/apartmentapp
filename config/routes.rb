@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   patch 'admin/update/:user_id' => "admin#update"
 
 
-  # put 'admin/remove_admin/:user_id' => "admin#remove_admin"
-  # patch 'admin/remove_admin/:user_id' => "admin#remove_admin"
+  put 'admin/remove_admin/:user_id' => "admin#remove_admin"
+  patch 'admin/remove_admin/:user_id' => "admin#remove_admin"
 
 
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}

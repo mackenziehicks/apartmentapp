@@ -59,8 +59,10 @@
               <li id="helloUser">
                 Hello, <br> <%=current_user.email%> !
               </li>
-              <li>
-                <%=current_user.roles.map {|role| role.name}.join(', ')%>
+              <li id="role">
+                Role:
+                <br>
+              <%=current_user.roles.map {|role| role.name}.join(', ')%>
               </li>
               <li>
               <%= link_to('Edit Profile', edit_user_registration_path)  %>

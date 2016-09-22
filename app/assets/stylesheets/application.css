@@ -14,7 +14,7 @@
  *= require_self
  */
 
-#helloUser {
+#helloUser, #role {
   color: white;
   text-align: center;
 }

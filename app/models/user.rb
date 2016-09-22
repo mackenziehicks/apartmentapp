@@ -5,7 +5,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :apartments
+  after_create :assign_role
 
+  def assign_role
+    add_role(:owner)
+  end
 
   def self.from_omniauth(auth)
      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
