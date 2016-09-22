@@ -7,6 +7,9 @@ class Apartment < ActiveRecord::Base
   validates_attachment :image, presence: true,
       content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] },
       size: { in: 0..10.megabytes }
+  validates :user, presence: true
+
+  resourcify
 
   def full_address
     @full_address = address_1 + " " + address_2 + " " + city + " " + state + " " + postal_code.to_s + " " + country

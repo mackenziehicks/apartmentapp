@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+
+
+  get 'admin/index'
+  # get 'admin/update'
+
+  put 'admin/update/:user_id' => "admin#update"
+  patch 'admin/update/:user_id' => "admin#update"
+
+
+  # put 'admin/remove_admin/:user_id' => "admin#remove_admin"
+  # patch 'admin/remove_admin/:user_id' => "admin#remove_admin"
+
+
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}
   resources :owners
   resources :apartments do

@@ -1,0 +1,31 @@
+<div class="page-header">
+  <h1>Admin</h1>
+</div>
+<table class= "table">
+  <thead>
+    <th>Email</th>
+    <th>User Role:</th>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+    <tr>
+      <td>
+        <%=user.email%>
+      </td>
+      <td>
+        <%=user.roles.map {|role| role.name}.join(', ')%>
+      </td>
+      <td>
+        <%= form_tag('/admin/update/' + user.id.to_s, method: :put) do %>
+          <input type="submit" value="Make Admin"></input>
+        <%end%>
+      </td>
+      <!-- <td>
+        <%= form_tag('/admin/remove_admin/' + user.id.to_s, method: :put) do %>
+          <input type="submit" value="Remove Admin"></input>
+        <%end%>
+      </td> -->
+    </tr>
+    <%end%>
+  </tbody>
+</table>

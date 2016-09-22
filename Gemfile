@@ -60,3 +60,5 @@ gem "paperclip", "~> 5.0.0"
 gem 'textacular', '~> 3.0'
 gem 'devise', '~> 4.2'
 gem 'omniauth-twitter'
+gem 'cancancan'
+gem 'rolify'
