@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   patch 'admin/remove_admin/:user_id' => "admin#remove_admin"
 
 
-  devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}
+  devise_for :users, controllers: {registrations: "registrations", omniauth_callbacks: "omniauth_callbacks"}
+
   resources :owners
   resources :apartments do
    # GET /apartmetns/:id/map_locations

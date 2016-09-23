@@ -55,9 +55,18 @@
             </li>
             <% if user_signed_in? %>
             <!-- <ul class="nav navbar-nav navbar-right"> -->
-              <li id="helloUser">
-                Hello, <br> <%=current_user.email%> !
-              </li>
+              <% if !current_user.image_file_name.nil? %>
+                <li><%= image_tag current_user.image.url(:small)%></li>
+              <%end%>
+              <% if !current_user.name.nil?%>
+                <li id="helloUser">
+                  Hello, <br> <%=current_user.name%> !
+                </li>
+              <%else%>
+                <li id="helloUser">
+                  Hello, <br> <%=current_user.email%> !
+                </li>
+              <% end %>
               <li id="role">
                 Role:
                 <br>

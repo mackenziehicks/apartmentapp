@@ -24,7 +24,12 @@
         <td><%= apartment.postal_code %></td>
         <td><%= apartment.country %></td>
         <td><%= apartment.user.email %></td>
-        <td><%= image_tag apartment.image.url(:small)%></td>
+
+        <% if !apartment.image_file_name.nil? %>
+          <td><%= image_tag apartment.image.url(:small)%></td>
+        <% else%>
+          <td></td>
+        <%end%>
         <td><%= link_to 'Show', apartment %></td>
         <% if !current_user.nil? %>
           <% if apartment.user == current_user || current_user.has_role?(:admin) %>
