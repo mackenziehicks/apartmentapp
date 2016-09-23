@@ -32,17 +32,12 @@ class ApartmentsController < ApplicationController
   def new
     @apartment = current_user.apartments.build
 
-    @owners_for_select = Owner.all.map do |owner|
-      [owner.name, owner.id]
-    end
   end
 
   # GET /apartments/1/edit
   def edit
     if @apartment.user == current_user
-      @owners_for_select = Owner.all.map do |owner|
-      [owner.name, owner.id]
-      end
+      true
     else
       redirect_to '/'
     end
@@ -52,10 +47,6 @@ class ApartmentsController < ApplicationController
   # POST /apartments.json
   def create
     @apartment = current_user.apartments.build(apartment_params)
-
-    @owners_for_select = Owner.all.map do |owner|
-      [owner.name, owner.id]
-    end
 
     respond_to do |format|
       if @apartment.save
@@ -71,9 +62,6 @@ class ApartmentsController < ApplicationController
   # PATCH/PUT /apartments/1
   # PATCH/PUT /apartments/1.json
   def update
-    @owners_for_select = Owner.all.map do |owner|
-      [owner.name, owner.id]
-    end
     respond_to do |format|
       if @apartment.update(apartment_params)
         format.html { redirect_to @apartment, notice: 'Apartment was successfully updated.' }
@@ -118,6 +106,6 @@ class ApartmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def apartment_params
-      params.require(:apartment).permit(:address_1, :address_2, :city, :postal_code, :state, :country, :owner_id, :lattitude, :longitude, :image)
+      params.require(:apartment).permit(:address_1, :address_2, :city, :postal_code, :state, :country, :user_id, :lattitude, :longitude, :image)
     end
 end

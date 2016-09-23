@@ -9,7 +9,8 @@ class Ability
    if user.has_role? :admin
      can :manage, :all
    elsif user.has_role? :owner
-     can :manage, Apartment, user_id: user.id
+    can :manage, Apartment, user_id: user.id
+    can :read, Apartment
    else
      can :read, Apartment
    end

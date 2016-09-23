@@ -1,5 +1,4 @@
 class Apartment < ActiveRecord::Base
-  belongs_to :owner
   belongs_to :user
   geocoded_by :full_address
   after_validation :geocode

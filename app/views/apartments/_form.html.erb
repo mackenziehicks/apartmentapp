@@ -37,10 +37,6 @@
     <%= f.label :country %><br>
     <%= f.text_field :country %>
   </div>
-  <div class="field">
-    <%= f.label :owner_id %><br>
-    <%=select(:apartment, :owner_id, @owners_for_select)%>
-  </div>
   <br>
   <div class="actions">
     <%= f.submit %>

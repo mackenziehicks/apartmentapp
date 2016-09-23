@@ -1,5 +1,3 @@
-
-
 <h1>Listing Apartments</h1>
 
 <table class="table">
@@ -11,7 +9,6 @@
       <th>Postal code</th>
       <th>State</th>
       <th>Country</th>
-      <th>Owner</th>
       <th>User</th>
       <th colspan="5"></th>
     </tr>
@@ -26,7 +23,6 @@
         <td><%= apartment.state %></td>
         <td><%= apartment.postal_code %></td>
         <td><%= apartment.country %></td>
-        <td><a href="/owners/ <%=apartment.owner.id%>"> <%= apartment.owner.name%></a></td>
         <td><%= apartment.user.email %></td>
         <td><%= image_tag apartment.image.url(:small)%></td>
         <td><%= link_to 'Show', apartment %></td>
@@ -42,8 +38,7 @@
 </table>
 
 <br>
-<%= link_to 'New Owner', new_owner_path %> |
-<%= link_to 'New Apartment', new_apartment_path %> 
+<%= link_to 'New Apartment', new_apartment_path %>
 <br>
 <hr>
 
